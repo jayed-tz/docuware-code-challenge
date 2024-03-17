@@ -1,10 +1,16 @@
-﻿using DocuwareCodeChallenge.Identity;
+﻿using DocuwareCodeChallenge.Data;
+using DocuwareCodeChallenge.Identity;
+using DocuwareCodeChallenge.Repositories;
+using DocuwareCodeChallenge.Repositories.Interfaces;
+using DocuwareCodeChallenge.Services;
+using DocuwareCodeChallenge.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
+
 
 // Add services to the container.
 builder.Services.AddAuthentication(x =>
@@ -33,11 +39,16 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy(IdentityPolicy.CreatorPolicyName, p => p.RequireClaim(IdentityPolicy.CreatorClaimName, "true"));
 });
 
-
 builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddDbContext<DataContext>();
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IEventRepository, EventRepository>();
+builder.Services.AddScoped<IEventService, EventService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -55,4 +66,3 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-
