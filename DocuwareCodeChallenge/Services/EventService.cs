@@ -43,7 +43,7 @@ namespace DocuwareCodeChallenge.Services
                 CreatorId = subClaim.Value
             };
 
-            return await _eventRepository.AddAsync(eventToCreate);
+            return await _eventRepository.AddEventAsync(eventToCreate);
         }
     }
 }

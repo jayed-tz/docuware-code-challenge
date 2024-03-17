@@ -15,7 +15,7 @@ namespace DocuwareCodeChallenge.Repositories
             _context = context;
         }
 
-        public async Task<Event> AddAsync(Event newEvent)
+        public async Task<Event> AddEventAsync(Event newEvent)
         {
             _context.Events.Add(newEvent);
             await _context.SaveChangesAsync();

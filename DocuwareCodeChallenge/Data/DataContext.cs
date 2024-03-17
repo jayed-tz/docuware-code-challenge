@@ -12,7 +12,7 @@ namespace DocuwareCodeChallenge.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=database-alpha.chqi6a6469hf.us-east-1.rds.amazonaws.com,1433;Database=Docuware;User Id=admin;Password=382ddea49041f34293deed49dda43a5a;TrustServerCertificate=true;");
+            optionsBuilder.UseSqlServer(@"");
         }
     }
 }
