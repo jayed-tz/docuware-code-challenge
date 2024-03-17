@@ -5,7 +5,7 @@ namespace DocuwareCodeChallenge.Repositories.Interfaces
 {
 	public interface IEventRepository
 	{
-        Task<Event> AddAsync(Event newEvent);
+        Task<Event> AddEventAsync(Event newEvent);
         Task<List<Event>> GetEventsAsync();
     }
 }
