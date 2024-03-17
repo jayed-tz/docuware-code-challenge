@@ -27,11 +27,6 @@ namespace DocuwareCodeChallenge.Repositories
         {
             return await _context.Registrations.Where(e => e.EventId == eventId).ToListAsync(); 
         }
-
-        public async Task<Registration?> GetRegistration(string registrationId)
-        {
-            return await _context.Registrations.FindAsync(registrationId);
-        }
     }
 }
 

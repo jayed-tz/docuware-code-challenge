@@ -29,7 +29,6 @@ namespace DocuwareCodeChallenge.Controllers
         public async Task<ActionResult<List<Event>>> GetEvent()
         {
             return await _eventService.GetEvents();
-           
         }
 
         [Authorize]

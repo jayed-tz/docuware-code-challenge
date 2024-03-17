@@ -2,6 +2,8 @@
 using DocuwareCodeChallenge.DTOs;
 using DocuwareCodeChallenge.Models;
 using DocuwareCodeChallenge.Repositories.Interfaces;
+using DocuwareCodeChallenge.Services;
+using DocuwareCodeChallenge.Services.Interfaces;
 using DocuwareCodeChallenge.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,26 +14,27 @@ namespace DocuwareCodeChallenge.Controllers
     [Route("users")]
     public class UserController : ControllerBase
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUserService _userService;
 
-        public UserController(IUserRepository userRepository)
+        public UserController(IUserService userService)
         {
-            _userRepository = userRepository;
+            _userService = userService;
         }
 
         [AllowAnonymous]
         [HttpPost("create")]
-        public async Task<User> Post([FromBody] UserRequest newUser)
+        public async Task<ActionResult<User>> CreateUser([FromBody] UserRequest newUser)
         {
-            var user = new User
+            try
             {
-                UserId = Guid.NewGuid().ToString(),
-                Email = newUser.Email,
-                PasswordHash = HashUtility.ComputeSHA256Hash(newUser.Password)
-            };
+                var createdUser = await _userService.AddUser(newUser);
 
-            await _userRepository.AddAsync(user);
-            return user;
+                return CreatedAtAction(nameof(CreateUser), new { userId = createdUser.UserId }, createdUser);
+            }
+            catch (Exception exception)
+            {
+                return StatusCode(500, exception.Message);
+            }
         }
     }
 }

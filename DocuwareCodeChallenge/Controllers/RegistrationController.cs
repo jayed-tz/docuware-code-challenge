@@ -22,19 +22,11 @@ namespace DocuwareCodeChallenge.Controllers
         }
 
         [RequireClaim(IdentityPolicy.CreatorClaimName, "true")]
-        [HttpGet("{registrationId}")]
-        public async Task<ActionResult<List<Registration>>> Get(string registrationId)
-        {
-            return await _registrationService.GetRegistrations(eventId);
-        }
-
-        [RequireClaim(IdentityPolicy.CreatorClaimName, "true")]
         [HttpGet]
         public async Task<ActionResult<List<Registration>>> GetByEvent([FromQuery] string eventId)
         {
-            return await _registrationService.GetRegistrations(eventId);
+            return await _registrationService.GetRegistrationsByEventId(eventId);
         }
-
 
         [AllowAnonymous]
         [HttpPost("create")]
@@ -44,7 +36,7 @@ namespace DocuwareCodeChallenge.Controllers
             {
                 var createdRegistration = await _registrationService.AddRegistration(newRegistration);
 
-                return CreatedAtAction(nameof(CreateRegistration), new { eventId = createdRegistration.EventId }, createdRegistration);
+                return CreatedAtAction(nameof(CreateRegistration), new { registrationId = createdRegistration.RegistrationId }, createdRegistration);
             }
             catch (Exception exception)
             {

@@ -22,11 +22,6 @@ namespace DocuwareCodeChallenge.Services
             return await _registrationRepository.GetRegistrationsAsync(eventId);
         }
 
-        public async Task<List<Registration>> GetRegistration(string registrationId)
-        {
-            return await _registrationRepository.GetRegistrationsAsync(eventId);
-        }
-
         public async Task<Registration> AddRegistration(RegistrationRequest newRegistration)
         {
             var registration = new Registration

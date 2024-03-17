@@ -5,7 +5,7 @@ namespace DocuwareCodeChallenge.Repositories.Interfaces
 {
 	public interface IUserRepository
 	{
-        Task<int> AddAsync(User user);
+        Task<User> AddUserAsync(User user);
     }
 }
 
