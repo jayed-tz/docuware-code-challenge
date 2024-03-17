@@ -53,6 +53,9 @@ builder.Services.AddScoped<IRegistrationRepository, RegistrationRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IEventService, EventService>();
 builder.Services.AddScoped<IRegistrationService, RegistrationService>();
+
+builder.Services.AddScoped<IIdentityService, IdentityService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

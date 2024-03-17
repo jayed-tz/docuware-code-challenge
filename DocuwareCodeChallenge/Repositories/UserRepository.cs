@@ -14,10 +14,17 @@ namespace DocuwareCodeChallenge.Repositories
             _context = context;
         }
 
-        public async Task<int> AddAsync(User user)
+        public async Task<User> AddUserAsync(User user)
         {
             await _context.Users.AddAsync(user);
-            return await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
+
+            return user;
+        }
+
+        public User? GetUser(string username, string passwordHash)
+        {
+            return _context.Users.FirstOrDefault(user => user.Email == username && user.PasswordHash == passwordHash);
         }
     }
 }

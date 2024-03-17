@@ -6,6 +6,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using DocuwareCodeChallenge.Data;
+using DocuwareCodeChallenge.Services.Interfaces;
+using DocuwareCodeChallenge.Services;
 
 namespace DocuwareCodeChallenge.Controllers
 {
@@ -13,58 +15,23 @@ namespace DocuwareCodeChallenge.Controllers
     [Route("identity")]
     public class IdentityController : ControllerBase
     {
-        private static readonly TimeSpan TokenLifetime = TimeSpan.FromDays(5);
-        private readonly IConfiguration _config;
-
-        public IdentityController(IConfiguration config)
+        private readonly IIdentityService _identityService;
+        public IdentityController(IIdentityService identityService)
         {
-            _config = config;
+            _identityService = identityService;
         }
 
         [HttpPost("token")]
         public IActionResult GenerateToken([FromBody] TokenGenerationRequest request)
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes(_config["JwtSettings:Key"]!);
-            var claims = new List<Claim> {
-            new (JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new (JwtRegisteredClaimNames.Email, request.Email)
-            };
-
-            using (var context = new DataContext())
+            try
             {
-                var user = context.Users.FirstOrDefault(it => it.Email.Equals(request.Email));
-
-                if (user != null)
-                {
-                    claims.Add(new Claim(JwtRegisteredClaimNames.Sub, user.UserId, ClaimValueTypes.String));
-
-                    // populate this claim based on some other logic
-                    var claim = new Claim(IdentityPolicy.CreatorClaimName, "true", ClaimValueTypes.Boolean);
-                    claims.Add(claim);
-                }
-                else
-                {
-                    var message = "User not found";
-                    return NotFound(message);
-                }
-
+                return Ok(_identityService.GenerateToken(request));
             }
-
-
-            var tokenDescriptor = new SecurityTokenDescriptor
+            catch (Exception exception)
             {
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.Add(TokenLifetime),
-                Issuer = "test.com",
-                Audience = "arbitrary.com",
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            var jwt = tokenHandler.WriteToken(token);
-
-            return Ok(jwt);
+                return StatusCode(500, exception.Message);
+            }
         }
     }
 }
