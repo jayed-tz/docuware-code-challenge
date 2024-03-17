@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using DocuwareCodeChallenge.Data;
 
 namespace DocuwareCodeChallenge.Controllers
 {
@@ -12,7 +13,7 @@ namespace DocuwareCodeChallenge.Controllers
     [Route("identity")]
     public class IdentityController : ControllerBase
     {
-        private static readonly TimeSpan TokenLifetime = TimeSpan.FromDays(5); // IMP: long lived
+        private static readonly TimeSpan TokenLifetime = TimeSpan.FromDays(5);
         private readonly IConfiguration _config;
 
         public IdentityController(IConfiguration config)
@@ -28,17 +29,35 @@ namespace DocuwareCodeChallenge.Controllers
             var claims = new List<Claim> {
             new (JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new (JwtRegisteredClaimNames.Email, request.Email)
-        };
-            claims.Add(new Claim(JwtRegisteredClaimNames.Sub, "test", ClaimValueTypes.String));
-            var claim = new Claim(IdentityPolicy.CreatorClaimName, "true", ClaimValueTypes.Boolean);
-            claims.Add(claim);
+            };
+
+            using (var context = new DataContext())
+            {
+                var user = context.Users.FirstOrDefault(it => it.Email.Equals(request.Email));
+
+                if (user != null)
+                {
+                    claims.Add(new Claim(JwtRegisteredClaimNames.Sub, user.UserId, ClaimValueTypes.String));
+
+                    // populate this claim based on some other logic
+                    var claim = new Claim(IdentityPolicy.CreatorClaimName, "true", ClaimValueTypes.Boolean);
+                    claims.Add(claim);
+                }
+                else
+                {
+                    var message = "User not found";
+                    return NotFound(message);
+                }
+
+            }
+
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.Add(TokenLifetime),
-                Issuer = _config["JwtSettings:Issuer"],
-                Audience = _config["JwtSettings:Audience"],
+                Issuer = "test.com",
+                Audience = "arbitrary.com",
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 
