@@ -1,0 +1,7 @@
+﻿@DocuwareCodeChallenge_HostAddress = http://localhost:5197
+
+GET {{DocuwareCodeChallenge_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
