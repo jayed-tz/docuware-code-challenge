@@ -1,16 +1,18 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../core/services/auth.service";
 import {Router} from "@angular/router";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
   errorMessage: string | null = null;
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.loginForm = this.fb.group({});
@@ -21,7 +23,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/event']);
     }
 
-    this.authService.isAuthenticatedObservable().subscribe(isAuthenticated => {
+    this.authService.isAuthenticatedObservable().pipe(takeUntil(this.destroy$)).subscribe(isAuthenticated => {
       if (isAuthenticated) {
         this.router.navigate(['/event']);
       }
@@ -47,5 +49,10 @@ export class LoginComponent implements OnInit {
       // Handle form validation errors (optional)
       console.log('Form is invalid');
     }
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 }

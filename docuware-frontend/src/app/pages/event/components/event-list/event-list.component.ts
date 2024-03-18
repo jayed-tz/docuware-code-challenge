@@ -10,7 +10,6 @@ import {Event} from "../../../../models/event.model";
 export class EventListComponent implements OnInit{
   eventList: Event[] = [];
   constructor(private eventService: EventService) {
-    console.log('ctor');
   }
 
   ngOnInit() {

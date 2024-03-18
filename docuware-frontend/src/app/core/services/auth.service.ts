@@ -43,7 +43,6 @@ export class AuthService {
       .pipe(
         tap(token => {
           // Store the token securely in local storage
-          console.log(token);
           localStorage.setItem('authToken', token);
           this.setAuthenticatedStatus(true);
         })
