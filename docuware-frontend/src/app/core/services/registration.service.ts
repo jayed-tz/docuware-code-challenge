@@ -18,4 +18,12 @@ export class RegistrationService {
       )
       .pipe();
   }
+
+  getRegistrations(eventId: string): Observable<Array<Registration>> {
+    return this.http
+      .get<Registration[]>(
+        `${environment.apiUrl}/registrations?eventid=${eventId}`
+      )
+      .pipe();
+  }
 }

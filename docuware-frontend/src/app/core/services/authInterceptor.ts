@@ -9,10 +9,10 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+  readonly protectedRoutes = ['registrations?eventid', 'events/create'];
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = localStorage.getItem('authToken');
-
-    const isProtectedRoute = request.url.includes('admin'); // Replace with your logic to identify protected routes
+    const isProtectedRoute = this.protectedRoutes.some(el => request.url.includes(el));
 
     if (token && isProtectedRoute) {
       request = request.clone({

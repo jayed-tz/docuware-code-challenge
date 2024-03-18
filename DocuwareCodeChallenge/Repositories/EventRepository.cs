@@ -15,6 +15,11 @@ namespace DocuwareCodeChallenge.Repositories
             _context = context;
         }
 
+        public async Task<List<Event>> GetEventsAsync()
+        {
+            return await _context.Events.ToListAsync();
+        }
+
         public async Task<Event> AddEventAsync(Event newEvent)
         {
             _context.Events.Add(newEvent);
@@ -23,10 +28,7 @@ namespace DocuwareCodeChallenge.Repositories
             return newEvent;
         }
 
-        public async Task<List<Event>> GetEventsAsync()
-        {
-            return await _context.Events.ToListAsync();
-        }
+        
     }
 }
 

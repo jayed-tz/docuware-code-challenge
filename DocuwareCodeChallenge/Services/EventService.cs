@@ -27,7 +27,7 @@ namespace DocuwareCodeChallenge.Services
             if (subClaim == null)
             {
                 throw new Exception("Event creator not found");
-            }
+           }
 
             var eventToCreate = new Event
             {

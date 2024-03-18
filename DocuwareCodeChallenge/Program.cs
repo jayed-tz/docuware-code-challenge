@@ -15,8 +15,9 @@ var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(MyAllowSpecificOrigins,
-        corsBuilder => corsBuilder.WithOrigins("*").WithMethods("GET", "POST").WithHeaders("Content-Type"));
+    //options.AddPolicy(MyAllowSpecificOrigins,
+    //    corsBuilder => corsBuilder.WithOrigins("*").WithMethods("GET", "POST").WithHeaders("Content-Type"));
+    options.AddDefaultPolicy(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 });
 
 
@@ -72,7 +73,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCors(MyAllowSpecificOrigins);
+app.UseCors();
 
 app.UseAuthentication();
 app.UseAuthorization();

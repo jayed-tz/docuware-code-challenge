@@ -3,9 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EventListComponent } from './pages/event/components/event-list/event-list.component';
-import { EventComponent } from './pages/event/container/event.component';
-import { RegistrationComponent } from './pages/registration/container/registration.component';
+import { EventListComponent } from './pages/event/event-list/event-list.component';
+import { CreateRegistrationComponent } from './pages/registration/create-registration/create-registration.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { LoginComponent } from './pages/login/login.component';
 import {ReactiveFormsModule} from "@angular/forms";
@@ -19,14 +18,17 @@ import {MatToolbar} from "@angular/material/toolbar";
 import {MatError, MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { RegistrationListComponent } from './pages/registration/registration-list/registration-list.component';
+import { CreateEventComponent } from './pages/event/create-event/create-event.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EventListComponent,
-    EventComponent,
-    RegistrationComponent,
-    LoginComponent
+    CreateRegistrationComponent,
+    LoginComponent,
+    RegistrationListComponent,
+    CreateEventComponent
   ],
   imports: [
     BrowserModule,
