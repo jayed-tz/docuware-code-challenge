@@ -1,12 +1,11 @@
 <mat-toolbar color="primary">
   <span class="nav-links">
-    <a mat-button routerLink="/event" routerLinkActive="active">Event</a>
-    <a mat-button routerLink="/registration" routerLinkActive="active">Registration</a>
+    <a mat-button routerLink="/event" routerLinkActive="activebutton">Event</a>
     @if(!isAuthenticated){
-      <a mat-button routerLink="/login" routerLinkActive="active">Login</a>
+      <a mat-button routerLink="/login" routerLinkActive="activebutton">Login</a>
     }
     @if(isAuthenticated){
-      <a mat-button (click)="logout()" routerLinkActive="active">Logout</a>
+      <a mat-button (click)="logout()">Logout</a>
     }
   </span>
 </mat-toolbar>

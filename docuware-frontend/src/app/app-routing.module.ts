@@ -7,7 +7,7 @@ import {AuthGuard} from "./gurads/authGuard";
 
 const routes: Routes = [
   {path: 'event', component: EventComponent},
-  {path: 'registration', component: RegistrationComponent},
+  {path: 'registration/:id', component: RegistrationComponent},
   {path: 'login', component: LoginComponent},
   { path: '**', redirectTo: 'event' }
 ];
