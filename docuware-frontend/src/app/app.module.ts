@@ -9,7 +9,7 @@ import { RegistrationListComponent } from './pages/registration/components/regis
 import { RegistrationComponent } from './pages/registration/container/registration.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { LoginComponent } from './pages/login/login.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {ReactiveFormsModule} from "@angular/forms";
 import {AuthInterceptor} from "./core/services/authInterceptor";
 import {AuthGuard} from "./gurads/authGuard";
 import {MatCard, MatCardActions, MatCardContent, MatCardTitle} from "@angular/material/card";

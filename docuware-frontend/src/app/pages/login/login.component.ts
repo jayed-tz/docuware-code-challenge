@@ -11,7 +11,6 @@ import {Subject, takeUntil} from "rxjs";
 })
 export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
-  errorMessage: string | null = null;
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
@@ -19,13 +18,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    if (this.authService.isAuthenticated()) {
-      this.router.navigate(['/event']);
-    }
-
-    this.authService.isAuthenticatedObservable().pipe(takeUntil(this.destroy$)).subscribe(isAuthenticated => {
+    this.authService.isAuthenticatedObservable()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(isAuthenticated => {
       if (isAuthenticated) {
-        this.router.navigate(['/event']);
+        this.navigateAway();
       }
     });
 
@@ -42,13 +39,15 @@ export class LoginComponent implements OnInit, OnDestroy {
 
       this.authService.getToken(username, password)
         .subscribe(token => {
-        // This will execute when the token is received
-          this.router.navigate(['/event']);
+          this.navigateAway();
       });
     } else {
-      // Handle form validation errors (optional)
-      console.log('Form is invalid');
+      console.error('Form is invalid');
     }
+  }
+
+  private navigateAway() {
+    this.router.navigate(['/event']);
   }
 
   ngOnDestroy() {

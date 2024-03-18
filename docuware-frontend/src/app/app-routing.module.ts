@@ -7,9 +7,9 @@ import {AuthGuard} from "./gurads/authGuard";
 
 const routes: Routes = [
   {path: 'event', component: EventComponent},
-  {path: 'admin-registration', component: RegistrationComponent, canActivate: [AuthGuard]},
+  {path: 'registration', component: RegistrationComponent},
   {path: 'login', component: LoginComponent},
-  {path: '', redirectTo: 'event', pathMatch: 'full'},
+  { path: '**', redirectTo: 'event' }
 ];
 
 @NgModule({
