@@ -1,11 +1,14 @@
 # Implementation of Docuware technical challenge
 
 This project contains the implementation of the technical task for the interview process at Docuware.
+
+The code for the core challenge (backend) is placed inside the folder named "DocuwareCodeChallenge".
+
 The project uses the latest .net version 8.
 
 ## Installation and run
 
-Restore the depepndencies using NuGet. Run the project.
+Restore the dependencies using NuGet. Run the project.
 
 The API is available at:
 `https://localhost:7150`
@@ -40,7 +43,7 @@ curl --location 'https://localhost:7150/events/create' \
 --header 'Authorization: Bearer xxxxxxx' \
 --data '{
     "Name": "Berlin Meet up",
-    "Description": "Quaterly meet up",
+    "Description": "Quarterly meet up",
     "Location": "Berlin",
     "StartTime": "04/19/2024 11:00 AM",
     "Duration": 120
