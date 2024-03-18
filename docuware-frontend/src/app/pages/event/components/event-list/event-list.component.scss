@@ -1,0 +1,21 @@
+.event-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.event-item {
+  margin-bottom: 20px;
+}
+
+.event-card {
+  width: 300px;
+}
+
+.event-details {
+  margin-bottom: 15px;
+}
+
+button.register-btn {
+  width: 100%;
+}

@@ -1,15 +1,14 @@
-<nav>
-  <a class="button"
-     routerLink="/event"
-     routerLinkActive="activebutton"
-     ariaCurrentWhenActive="page">
-    Event
-  </a> |
-  <a class="button"
-     routerLink="/registration"
-     routerLinkActive="activebutton"
-     ariaCurrentWhenActive="page">
-    Registration
-  </a>
-</nav>
-<router-outlet />
+<mat-toolbar color="primary">
+  <span class="nav-links">
+    <a mat-button routerLink="/event" routerLinkActive="active">Event</a>
+    <a mat-button routerLink="/admin-registration" routerLinkActive="active">Registration</a>
+    @if(!isAuthenticated){
+      <a mat-button routerLink="/login" routerLinkActive="active">Login</a>
+    }
+    @if(isAuthenticated){
+      <a mat-button (click)="logout()" routerLinkActive="active">Logout</a>
+    }
+  </span>
+</mat-toolbar>
+<router-outlet></router-outlet>
+

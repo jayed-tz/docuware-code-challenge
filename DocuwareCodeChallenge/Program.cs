@@ -10,7 +10,14 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(MyAllowSpecificOrigins,
+        corsBuilder => corsBuilder.WithOrigins("*").WithMethods("GET", "POST").WithHeaders("Content-Type"));
+});
 
 // Add services to the container.
 builder.Services.AddAuthentication(x =>
@@ -66,6 +73,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthentication();
 app.UseAuthorization();

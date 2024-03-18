@@ -1,1 +1,15 @@
-<p>event-list works!</p>
+<div class="event-list">
+  <div class="event-item" *ngFor="let event of eventList">
+    <mat-card class="event-card">
+      <mat-card-content class="event-details">
+        <h2>{{ event.name }}</h2>
+        <p>{{ event.description }}</p>
+        <p><span>Where:</span> {{ event.location }}</p>
+        <p><span>When:</span> {{ event.startTime | date:'short' }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="primary">Register</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
