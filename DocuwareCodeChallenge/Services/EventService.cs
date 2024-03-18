@@ -1,15 +1,12 @@
-﻿using System;
-using System.Security.Claims;
-using DocuwareCodeChallenge.Data;
+﻿using System.Security.Claims;
 using DocuwareCodeChallenge.DTOs;
 using DocuwareCodeChallenge.Models;
-using DocuwareCodeChallenge.Repositories;
 using DocuwareCodeChallenge.Repositories.Interfaces;
 using DocuwareCodeChallenge.Services.Interfaces;
 
 namespace DocuwareCodeChallenge.Services
 {
-	public class EventService: IEventService
+    public class EventService: IEventService
     {
         private readonly IEventRepository _eventRepository;
 

@@ -1,14 +1,8 @@
-﻿using System;
-using DocuwareCodeChallenge.Identity;
+﻿using DocuwareCodeChallenge.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System.Security.Claims;
-using DocuwareCodeChallenge.Data;
 using DocuwareCodeChallenge.Models;
 using DocuwareCodeChallenge.DTOs;
-using Microsoft.EntityFrameworkCore;
-using DocuwareCodeChallenge.Services;
 using DocuwareCodeChallenge.Services.Interfaces;
 
 namespace DocuwareCodeChallenge.Controllers
@@ -49,4 +43,3 @@ namespace DocuwareCodeChallenge.Controllers
         }
     }
 }
-

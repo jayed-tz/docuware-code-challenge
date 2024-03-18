@@ -1,13 +1,6 @@
-﻿using System;
-using DocuwareCodeChallenge.Identity;
+﻿using DocuwareCodeChallenge.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using DocuwareCodeChallenge.Data;
 using DocuwareCodeChallenge.Services.Interfaces;
-using DocuwareCodeChallenge.Services;
 
 namespace DocuwareCodeChallenge.Controllers
 {
