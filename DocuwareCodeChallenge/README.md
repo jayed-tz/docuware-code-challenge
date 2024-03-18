@@ -12,6 +12,8 @@ The API is available at:
 
 OpenAPI support has been enabled, the swagger documentation can be found at: `https://localhost:7150/swagger/index.html`
 
+> The DB connection string will be supplied through the email
+
 ### Identity
 ##### Retrieve a jwt token
 `https://localhost:7150/identity/token` [POST]

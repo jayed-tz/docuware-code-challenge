@@ -12,6 +12,8 @@ The API is available at:
 
 OpenAPI support has been enabled, the swagger documentation can be found at: `https://localhost:7150/swagger/index.html`
 
+> The DB connection string will be supplied through the email
+
 ### Identity
 ##### Retrieve a jwt token
 `https://localhost:7150/identity/token` [POST]
@@ -70,8 +72,17 @@ A few things were assumed during the development of the project:
 1. User registration is not necessary for the prototype
 2. The Event DTO (`EventRequest`) contains a property for the duration, it seemed user friendly. However, the DB model `Event` contains the computed EndTime.
 
-## Improvements
+## Improvements and limitations
 The implementation was kept simple with potential enhancement and improvement areas on:
-1. Retrieve key from a suitable service (AWS Secrets manager, Azure Key Vault)
-2. It was coded on the master branch for simplicity, a proper branch convention would be ideal
-3. 
+1. Retrieve key from a suitable service (AWS Secrets manager, Azure Key Vault etc.)
+2. It was coded on the master branch for simplicity, a proper branching convention would be ideal
+3. Connection string is hardcoded for now, a proper alternative is necessary
+4. Everything was implemented under one project, separation is necessary for maintainability
+5. Long lived token was used for development
+6. No test has been added
+7. No deployment pipeline has been added
+8. No linting and coverage tools have been added
+8. A proper error handling mechanism is essential. For now, the handling is kept simple and poor
+
+
+##### There can be more assumptions and improvement scopes
