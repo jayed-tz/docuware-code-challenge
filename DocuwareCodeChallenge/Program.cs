@@ -19,7 +19,7 @@ builder.Services.AddCors(options =>
         corsBuilder => corsBuilder.WithOrigins("*").WithMethods("GET", "POST").WithHeaders("Content-Type"));
 });
 
-// Add services to the container.
+
 builder.Services.AddAuthentication(x =>
 {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -32,7 +32,7 @@ builder.Services.AddAuthentication(x =>
         ValidIssuer = config["JwtSettings:Issuer"],
         ValidAudience = config["JwtSettings:Audience"],
         IssuerSigningKey = new SymmetricSecurityKey
-(Encoding.UTF8.GetBytes(config["JwtSettings:Key"]!)), // IMP: retireve key from sercets manager / azure keyvault
+(Encoding.UTF8.GetBytes(config["JwtSettings:Key"]!)),
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateLifetime = true,
@@ -47,7 +47,7 @@ builder.Services.AddAuthorization(options =>
 });
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -65,7 +65,6 @@ builder.Services.AddScoped<IIdentityService, IdentityService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

@@ -18,6 +18,7 @@ namespace DocuwareCodeChallenge.Controllers
             _registrationService = registrationService;
         }
 
+        [Authorize]
         [RequireClaim(IdentityPolicy.CreatorClaimName, "true")]
         [HttpGet]
         public async Task<ActionResult<List<Registration>>> GetByEvent([FromQuery] string eventId)

@@ -1,10 +1,8 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
 import {of, Observable, catchError, tap, BehaviorSubject} from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Event } from '../../models/event.model';
 import {Router} from "@angular/router";
+import {environment} from "../../../environment";
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -33,8 +31,8 @@ export class AuthService {
   getToken(username: string, password: string): Observable<string> {
     return this.http
       .post(
-        'https://localhost:7150/identity/token' // TODO: config
-        , {
+        `${environment.apiUrl}/identity/token`,
+         {
           username,
           password,
         },{

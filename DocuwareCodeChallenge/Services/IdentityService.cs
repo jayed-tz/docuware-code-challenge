@@ -40,7 +40,7 @@ namespace DocuwareCodeChallenge.Services
                 {
                     claims.Add(new Claim(JwtRegisteredClaimNames.Sub, user.UserId, ClaimValueTypes.String));
 
-                    // populate this claim based on some other logic
+                    // ideally, this should be populated based on some other logic
                     var claim = new Claim(IdentityPolicy.CreatorClaimName, "true", ClaimValueTypes.Boolean);
                     claims.Add(claim);
                 }
@@ -49,7 +49,6 @@ namespace DocuwareCodeChallenge.Services
                     throw new Exception("User not found");
                 }
             }
-
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
