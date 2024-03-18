@@ -1,10 +1,6 @@
-﻿using System;
-using DocuwareCodeChallenge.DTOs;
+﻿using DocuwareCodeChallenge.DTOs;
 using DocuwareCodeChallenge.Models;
-using DocuwareCodeChallenge.Repositories.Interfaces;
-using DocuwareCodeChallenge.Services;
 using DocuwareCodeChallenge.Services.Interfaces;
-using DocuwareCodeChallenge.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,9 +1,6 @@
-﻿using System;
-using DocuwareCodeChallenge.Data;
-using DocuwareCodeChallenge.DTOs;
+﻿using DocuwareCodeChallenge.DTOs;
 using DocuwareCodeChallenge.Identity;
 using DocuwareCodeChallenge.Models;
-using DocuwareCodeChallenge.Services;
 using DocuwareCodeChallenge.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
