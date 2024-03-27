@@ -1,12 +1,32 @@
-# Implementation of Docuware technical challenge
+# This is an implementation of a use case that is focused on .NET
 
-This project contains the implementation of the technical task for the interview process at Docuware.
+The requirements are as follows:
+1. There are two kinds of users
+    a. An event creator who has to login
+    b. An event participant, who can register for the event
+2. The event creator
+    a. Can create an event
+    b. Can see all registrations for an event
+3. The event participant
+    a. Can see all events,
+    b. Choose one event and fill the registration form for it
+4. An event has the following fields
+    a. Name
+    b. Description
+    c. Location
+    d. Start time
+    e. End time
+5. A registration may have the following fields
+    a. Name
+    b. Phone number
+    c. Email address
 
-The code for the core challenge (backend) is placed inside the folder named "DocuwareCodeChallenge".
+Optionally, add an angular application to serve a UI for the aspnet backend.
 
-The project uses the latest .net version 8.
+
 
 ## Installation and run
+The project uses the latest .net version 8.
 
 Restore the dependencies using NuGet. Run the project.
 
@@ -15,7 +35,7 @@ The API is available at:
 
 OpenAPI support has been enabled, the swagger documentation can be found at: `https://localhost:7150/swagger/index.html`
 
-> The DB connection string will be supplied through the email
+> Replace the DB connection string with your own
 
 ### Identity
 ##### Retrieve a jwt token
@@ -71,14 +91,14 @@ curl --location 'https://localhost:7150/registrations?eventid=xxx' \
 ```
 
 ## Assumptions
-A few things were assumed during the development of the project:
+A couple of assumptions that were made during the development of the project:
 1. User registration is not necessary for the prototype
 2. The Event DTO (`EventRequest`) contains a property for the duration, it seemed user friendly. However, the DB model `Event` contains the computed EndTime.
 
 ## Improvements and limitations
 The implementation was kept simple with potential enhancement and improvement areas on:
 1. Retrieve key from a suitable service (AWS Secrets manager, Azure Key Vault etc.)
-2. It was coded on the master branch for simplicity, a proper branching convention would be ideal
+2. Use a Response DTO instead of the DB models
 3. Connection string is hardcoded for now, a proper alternative is necessary
 4. Everything was implemented under one project, separation is necessary for maintainability
 5. Long lived token was used for development
@@ -86,6 +106,7 @@ The implementation was kept simple with potential enhancement and improvement ar
 7. No deployment pipeline has been added
 8. No linting and coverage tools have been added
 8. A proper error handling mechanism is essential. For now, the handling is kept simple and poor
+9. The Angular project is bare minimum, that is not the focus of the implementation
 
 
 ##### There can be more assumptions and improvement scopes
